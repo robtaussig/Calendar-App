@@ -31,7 +31,7 @@ export default class Form extends React.Component {
     let email = this.props.prefillInfo.email;
     let _email = email !== '' ? email : 'Enter email';
     let description = this.props.prefillInfo.title;
-    let _description = description !== '' ? email : 'Enter purpose';
+    let _description = description !== '' ? description : 'Enter purpose';
     return (
       <div>
         <ul className="form">

@@ -65,11 +65,11 @@ export default class Home extends React.Component {
     let date = this.state.currentMonth;
     let appointmentInfo = {
       appointment_date: date,
-      title: this.state.formInfo.description,
-      email: this.state.formInfo.email
+      title: data.description,
+      email: data.email
     };
     if (this.state.action === 'Update') {
-      AppointmentActions.updateAppointment(appointmentInfo,this.state.formInfo);
+      AppointmentActions.updateAppointment(appointmentInfo,this.selectedAppointment);
     } else {
       AppointmentActions.createAppointment(appointmentInfo);
     }

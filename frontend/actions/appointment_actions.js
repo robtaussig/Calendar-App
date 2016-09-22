@@ -16,8 +16,8 @@ module.exports = {
     AppointmentApi.createAppointment(data,this.receiveAppointment, this.receiveError);
   },
 
-  updateAppointment (data) {
-    AppointmentApi.updateAppointment(data,this.receiveAppointment, this.receiveError);
+  updateAppointment (data,appointment) {
+    AppointmentApi.updateAppointment(data,appointment,this.receiveAppointment, this.receiveError);
   },
 
   deleteAppointment (data) {

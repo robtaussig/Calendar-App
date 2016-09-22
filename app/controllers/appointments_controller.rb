@@ -13,6 +13,17 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def update
+    @appointment = Appointment.find(params[:id])
+    if @appointment.update_attribute('title',appointment_params[:title]) &&
+      @appointment.update_attribute('email',appointment_params[:email])
+      render :show
+    else
+      @errors = @appointment.errors.full_messages
+      render json: @errors, status: 401
+    end
+  end
+
   def destroy
     @appointment = Appointment.find(params[:id])
     @appointment.destroy!

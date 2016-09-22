@@ -16,7 +16,7 @@ module.exports = {
 
   fetchAppointment (id, successCB, errorCB) {
     $.ajax({
-      url: '/appointments/' + id,
+      url: 'appointments/' + id,
       data: {params: id},
       success: (resp) => {
         successCB(resp);
@@ -27,9 +27,10 @@ module.exports = {
     });
   },
 
-  updateAppointment (data, successCB, errorCB) {
+  updateAppointment (data, appointment, successCB, errorCB) {
+    let id = appointment.id;
     $.ajax({
-      url: '/appointments',
+      url: '/appointments/' + id,
       type: 'PATCH',
       data: {appointment: data},
       success: (resp) => {

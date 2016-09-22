@@ -8,7 +8,12 @@ let _currentAppointment = {
 let _appointments = [];
 
 function _resetAppointment (appointment) {
-  _appointments.push(appointment);
+  if (_appointments.some(ap => ap.id === appointment.id)) {
+    const toDelete = _appointments.filter(ap => ap.id === appointment.id)[0];
+    _appointments.splice(_appointments.indexOf(toDelete), 1, appointment);
+  } else {
+    _appointments.push(appointment);
+  }
   _currentAppointment = appointment;
 }
 

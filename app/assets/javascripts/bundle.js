@@ -27481,11 +27481,11 @@ var Home = function (_React$Component) {
       var date = this.state.currentMonth;
       var appointmentInfo = {
         appointment_date: date,
-        title: this.state.formInfo.description,
-        email: this.state.formInfo.email
+        title: data.description,
+        email: data.email
       };
       if (this.state.action === 'Update') {
-        _appointment_actions2.default.updateAppointment(appointmentInfo, this.state.formInfo);
+        _appointment_actions2.default.updateAppointment(appointmentInfo, this.selectedAppointment);
       } else {
         _appointment_actions2.default.createAppointment(appointmentInfo);
       }
@@ -28072,8 +28072,8 @@ module.exports = {
   createAppointment: function createAppointment(data) {
     _appointment_api2.default.createAppointment(data, this.receiveAppointment, this.receiveError);
   },
-  updateAppointment: function updateAppointment(data) {
-    _appointment_api2.default.updateAppointment(data, this.receiveAppointment, this.receiveError);
+  updateAppointment: function updateAppointment(data, appointment) {
+    _appointment_api2.default.updateAppointment(data, appointment, this.receiveAppointment, this.receiveError);
   },
   deleteAppointment: function deleteAppointment(data) {
     _appointment_api2.default.removeAppointment(data, this.removeAppointment, this.receiveError);
@@ -28137,7 +28137,7 @@ module.exports = {
   },
   fetchAppointment: function fetchAppointment(id, successCB, errorCB) {
     $.ajax({
-      url: '/appointments/' + id,
+      url: 'appointments/' + id,
       data: { params: id },
       success: function success(resp) {
         successCB(resp);
@@ -28147,9 +28147,10 @@ module.exports = {
       }
     });
   },
-  updateAppointment: function updateAppointment(data, successCB, errorCB) {
+  updateAppointment: function updateAppointment(data, appointment, successCB, errorCB) {
+    var id = appointment.id;
     $.ajax({
-      url: '/appointments',
+      url: '/appointments/' + id,
       type: 'PATCH',
       data: { appointment: data },
       success: function success(resp) {
@@ -28709,7 +28710,16 @@ var _currentAppointment = {};
 var _appointments = [];
 
 function _resetAppointment(appointment) {
-  _appointments.push(appointment);
+  if (_appointments.some(function (ap) {
+    return ap.id === appointment.id;
+  })) {
+    var toDelete = _appointments.filter(function (ap) {
+      return ap.id === appointment.id;
+    })[0];
+    _appointments.splice(_appointments.indexOf(toDelete), 1, appointment);
+  } else {
+    _appointments.push(appointment);
+  }
   _currentAppointment = appointment;
 }
 
@@ -35124,7 +35134,7 @@ var Form = function (_React$Component) {
       var email = this.props.prefillInfo.email;
       var _email = email !== '' ? email : 'Enter email';
       var description = this.props.prefillInfo.title;
-      var _description = description !== '' ? email : 'Enter purpose';
+      var _description = description !== '' ? description : 'Enter purpose';
       return _react2.default.createElement(
         "div",
         null,
