@@ -49,12 +49,12 @@
    cursor: pointer;
  }
 
- div.selected {
-   background-color: limegreen;
- }
-
  div.hasAppointment {
    background-color: darkgreen;
+ }
+
+ div.selected {
+   background-color: limegreen;
  }
 
  ul.days {
@@ -151,12 +151,36 @@
 
  ul.appt-info {
    position: relative;
-   width: 900px;
+   width: 100%;
    margin: 20px;
  }
 
  ul.appt-info li {
-   margin-left: 200px;
+   width: 100%;
+   left: 25%;
+   position: relative;
+   margin: 15px;
    float: left;
-   padding: 20px;
+ }
+
+ ul.buttons {
+   position: relative;
+   width: 100%;
+   margin: 15px;
+ }
+
+ ul.buttons li {
+   position: relative;
+   margin-bottom: 15px;
+   margin-right: 10px;
+   float: right;
+   right: 10%;
+   padding: 2px 2px;
+   border: 1px solid #000;
+   background-color: red;
+   cursor: pointer;
+ }
+
+ ul.buttons li:hover {
+   background-color: darkred;
  }

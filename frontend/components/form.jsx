@@ -8,8 +8,13 @@ export default class Form extends React.Component {
     this.submit = this.submit.bind(this);
     this.state = {
       description: "",
-      email: ""
+      email: "",
+      buttonText: "Submit"
     };
+  }
+
+  componentWillReceiveProps () {
+
   }
 
   setEmail (e) {
@@ -42,7 +47,7 @@ export default class Form extends React.Component {
           </li>
           <li>
             <div onClick={this.submit} className="submit-button">
-              Submit
+              {this.props.buttonText}
             </div>
           </li>
         </ul>

@@ -27398,10 +27398,6 @@ var _form = __webpack_require__(264);
 
 var _form2 = _interopRequireDefault(_form);
 
-var _appt_info = __webpack_require__(265);
-
-var _appt_info2 = _interopRequireDefault(_appt_info);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27423,13 +27419,16 @@ var Home = function (_React$Component) {
     _this.makeAppointment = _this.makeAppointment.bind(_this);
     _this.updateForm = _this.updateForm.bind(_this);
     _this.setDate = _this.setDate.bind(_this);
+    _this.updateAppointment = _this.updateAppointment.bind(_this);
+    _this.deleteAppointment = _this.deleteAppointment.bind(_this);
+    _this.selectedAppointment = {};
     _this.state = {
       appointments: [],
       currentMonth: new Date(),
       formInfo: {},
       selectedDate: new Date(),
       dates: [],
-      selectedAppointment: {}
+      action: 'Submit'
     };
     return _this;
   }
@@ -27449,6 +27448,7 @@ var Home = function (_React$Component) {
     key: 'changeMonth',
     value: function changeMonth(direction) {
       this.state.currentMonth.setMonth(this.state.currentMonth.getMonth() + direction);
+      this.selectedAppointment = {};
       this.setState({
         appointments: _appointment_store2.default.allAppointments(),
         selectedDate: ""
@@ -27462,9 +27462,8 @@ var Home = function (_React$Component) {
   }, {
     key: 'makeAppointment',
     value: function makeAppointment() {
-      debugger;
-      if (_appointment_store2.default.allAppointments().include(this.selectedDate)) {
-        _appointment_actions2.default.updateAppointment(this.state.formInfo);
+      if (this.state.action === 'Update') {
+        _appointment_actions2.default.updateAppointment(this.selectedAppointment, this.state.formInfo);
       } else {
         _appointment_actions2.default.createAppointment(this.state.formInfo);
       }
@@ -27474,15 +27473,35 @@ var Home = function (_React$Component) {
     value: function setDate(date) {
       var _this2 = this;
 
+      this.selectedAppointment = {};
+      this.setState({ action: 'Submit' });
       var selectedAppointment = [];
       if (this.state.appointments) {
-        selectedAppointment = this.appointments.filter(function (appt) {
-          return appt.getMonth() === _this2.state.currentMonth.getMonth() && appt.getYear() === _this2.state.currentMonth.getYear() && appt.getDate() === date;
+        selectedAppointment = this.state.appointments.filter(function (appt) {
+          var testDate = new Date(appt.appointment_date);
+          return testDate.getMonth() === _this2.state.currentMonth.getMonth() && testDate.getYear() === _this2.state.currentMonth.getYear() && testDate.getDate() === date;
         });
       }
       if (selectedAppointment.length > 0) {
-        this.setState({ selectedAppointment: selectedAppointment[0] });
+        this.setSelectedAppointment(selectedAppointment);
       }
+      this.setState({ selectedDate: date });
+    }
+  }, {
+    key: 'updateAppointment',
+    value: function updateAppointment(e) {
+      this.setState({ action: 'Update' });
+    }
+  }, {
+    key: 'deleteAppointment',
+    value: function deleteAppointment(e) {
+      _appointment_actions2.default.deleteAppointment(this.selectedAppointment);
+      this.selectedAppointment = {};
+    }
+  }, {
+    key: 'setSelectedAppointment',
+    value: function setSelectedAppointment(appointment) {
+      this.selectedAppointment = appointment[0];
     }
   }, {
     key: 'receiveChange',
@@ -27497,6 +27516,25 @@ var Home = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var apptEmail = this.selectedAppointment.email || "";
+      var apptTitle = this.selectedAppointment.title || "";
+      var _buttons = this.selectedAppointment.email ? [_react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'div',
+          { onClick: this.updateAppointment, className: 'update' },
+          'Update!'
+        )
+      ), _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          'div',
+          { onClick: this.deleteAppointment, className: 'delete' },
+          'Delete'
+        )
+      )] : "";
       return _react2.default.createElement(
         'div',
         null,
@@ -27504,12 +27542,43 @@ var Home = function (_React$Component) {
           changeMonth: this.changeMonth,
           currentMonth: this.state.currentMonth }),
         _react2.default.createElement(_form2.default, { updateChanges: this.updateForm,
-          submitForm: this.makeAppointment }),
+          submitForm: this.makeAppointment,
+          buttonText: this.state.action }),
         _react2.default.createElement(_calendar2.default, { selectedDate: this.state.selectedDate,
           selectDate: this.setDate,
           appointments: this.state.dates,
           currentMonth: this.state.currentMonth }),
-        _react2.default.createElement(_appt_info2.default, { apptInfo: this.state.selectedAppointment })
+        _react2.default.createElement(
+          'ul',
+          { className: 'appt-info' },
+          _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              'b',
+              null,
+              'Email: '
+            ),
+            ' ',
+            apptEmail
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              'b',
+              null,
+              'Purpose: '
+            ),
+            ' ',
+            apptTitle
+          )
+        ),
+        _react2.default.createElement(
+          'ul',
+          { className: 'buttons' },
+          _buttons
+        )
       );
     }
   }]);
@@ -34979,12 +35048,16 @@ var Form = function (_React$Component) {
     _this.submit = _this.submit.bind(_this);
     _this.state = {
       description: "",
-      email: ""
+      email: "",
+      buttonText: "Submit"
     };
     return _this;
   }
 
   _createClass(Form, [{
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps() {}
+  }, {
     key: "setEmail",
     value: function setEmail(e) {
       e.preventDefault();
@@ -35030,7 +35103,7 @@ var Form = function (_React$Component) {
             _react2.default.createElement(
               "div",
               { onClick: this.submit, className: "submit-button" },
-              "Submit"
+              this.props.buttonText
             )
           )
         )
@@ -35045,93 +35118,6 @@ exports.default = Form;
 
 
 Form.propTypes = {};
-
-/***/ },
-/* 265 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(20);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var AppInfo = function (_React$Component) {
-  _inherits(AppInfo, _React$Component);
-
-  function AppInfo(props) {
-    _classCallCheck(this, AppInfo);
-
-    return _possibleConstructorReturn(this, (AppInfo.__proto__ || Object.getPrototypeOf(AppInfo)).call(this, props));
-  }
-
-  _createClass(AppInfo, [{
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps() {
-      this.title = this.props.apptInfo.title;
-      this.email = this.props.apptInfo.email;
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var apptTitle = this.title || "";
-      var apptEmail = this.email || "";
-
-      return _react2.default.createElement(
-        "div",
-        null,
-        _react2.default.createElement(
-          "ul",
-          { className: "appt-info" },
-          _react2.default.createElement(
-            "li",
-            null,
-            _react2.default.createElement(
-              "b",
-              null,
-              "Email: "
-            ),
-            " ",
-            apptEmail
-          ),
-          _react2.default.createElement(
-            "li",
-            null,
-            _react2.default.createElement(
-              "b",
-              null,
-              "Purpose: "
-            ),
-            " ",
-            apptTitle
-          )
-        )
-      );
-    }
-  }]);
-
-  return AppInfo;
-}(_react2.default.Component);
-
-exports.default = AppInfo;
-
-
-AppInfo.propTypes = {};
 
 /***/ }
 /******/ ]);

@@ -4,7 +4,6 @@ import AppointmentActions from '../actions/appointment_actions';
 import AppointmentStore from '../stores/appointment_store';
 import NavBar from './nav_bar';
 import Form from './form';
-import ApptInfo from './appt_info';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -14,14 +13,17 @@ export default class Home extends React.Component {
     this.makeAppointment = this.makeAppointment.bind(this);
     this.updateForm = this.updateForm.bind(this);
     this.setDate = this.setDate.bind(this);
-    this.state = {
+    this.updateAppointment = this.updateAppointment.bind(this);
+    this.deleteAppointment = this.deleteAppointment.bind(this);
+    this.selectedAppointment = {};
+    this.state = ({
       appointments: [],
       currentMonth: new Date(),
       formInfo: {},
       selectedDate: new Date(),
       dates: [],
-      selectedAppointment: {}
-    };
+      action: 'Submit'
+    });
   }
 
   componentDidMount () {
@@ -35,6 +37,7 @@ export default class Home extends React.Component {
 
   changeMonth (direction) {
     this.state.currentMonth.setMonth(this.state.currentMonth.getMonth() + direction);
+    this.selectedAppointment = {};
     this.setState({
       appointments: AppointmentStore.allAppointments(),
       selectedDate: ""
@@ -46,28 +49,44 @@ export default class Home extends React.Component {
   }
 
   makeAppointment () {
-    debugger
-    if (AppointmentStore.allAppointments().include(this.selectedDate)) {
-      AppointmentActions.updateAppointment(this.state.formInfo);
+    if (this.state.action === 'Update') {
+      AppointmentActions.updateAppointment(this.selectedAppointment,this.state.formInfo);
     } else {
       AppointmentActions.createAppointment(this.state.formInfo);
     }
   }
 
   setDate (date) {
+    this.selectedAppointment = {};
+    this.setState({action: 'Submit'});
     let selectedAppointment = [];
     if ( this.state.appointments ) {
-      selectedAppointment = this.appointments.filter(appt => {
+      selectedAppointment = this.state.appointments.filter(appt => {
+        let testDate = new Date(appt.appointment_date);
         return (
-          appt.getMonth() === this.state.currentMonth.getMonth() &&
-          appt.getYear() === this.state.currentMonth.getYear() &&
-          appt.getDate() === (date)
+          testDate.getMonth() === this.state.currentMonth.getMonth() &&
+          testDate.getYear() === this.state.currentMonth.getYear() &&
+          testDate.getDate() === (date)
         );
       });
     }
     if (selectedAppointment.length > 0) {
-      this.setState({selectedAppointment: selectedAppointment[0]});
+      this.setSelectedAppointment(selectedAppointment);
     }
+    this.setState({selectedDate: date});
+  }
+
+  updateAppointment (e) {
+    this.setState({action: 'Update'});
+  }
+
+  deleteAppointment (e) {
+    AppointmentActions.deleteAppointment(this.selectedAppointment);
+    this.selectedAppointment = {};
+  }
+
+  setSelectedAppointment(appointment) {
+    this.selectedAppointment = appointment[0];
   }
 
   receiveChange() {
@@ -78,18 +97,28 @@ export default class Home extends React.Component {
   }
 
   render() {
+    let apptEmail = this.selectedAppointment.email || "";
+    let apptTitle = this.selectedAppointment.title || "";
+    let _buttons = this.selectedAppointment.email ?
+    [<li><div onClick={this.updateAppointment} className="update">Update!</div></li>,
+    <li><div onClick={this.deleteAppointment} className="delete">Delete</div></li>] : "";
     return (
       <div>
         <NavBar makeAppointment={this.makeAppointment}
           changeMonth={this.changeMonth}
           currentMonth={this.state.currentMonth}/>
         <Form updateChanges={this.updateForm}
-          submitForm={this.makeAppointment}/>
+          submitForm={this.makeAppointment}
+          buttonText={this.state.action}/>
         <Calendar selectedDate={this.state.selectedDate}
           selectDate={this.setDate}
           appointments={this.state.dates}
           currentMonth={this.state.currentMonth}/>
-        <ApptInfo apptInfo={this.state.selectedAppointment}/>
+          <ul className="appt-info">
+            <li><b>Email: </b> {apptEmail}</li>
+            <li><b>Purpose: </b> {apptTitle}</li>
+          </ul>
+          <ul className='buttons'>{_buttons}</ul>
       </div>
     );
   }
