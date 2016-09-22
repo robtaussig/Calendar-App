@@ -27398,6 +27398,10 @@ var _form = __webpack_require__(264);
 
 var _form2 = _interopRequireDefault(_form);
 
+var _error_store = __webpack_require__(266);
+
+var _error_store2 = _interopRequireDefault(_error_store);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27417,18 +27421,23 @@ var Home = function (_React$Component) {
     _this.receiveChange = _this.receiveChange.bind(_this);
     _this.changeMonth = _this.changeMonth.bind(_this);
     _this.makeAppointment = _this.makeAppointment.bind(_this);
-    _this.updateForm = _this.updateForm.bind(_this);
     _this.setDate = _this.setDate.bind(_this);
     _this.updateAppointment = _this.updateAppointment.bind(_this);
     _this.deleteAppointment = _this.deleteAppointment.bind(_this);
     _this.selectedAppointment = {};
+    _this.receiveError = _this.receiveError.bind(_this);
     _this.state = {
       appointments: [],
       currentMonth: new Date(),
       formInfo: {},
       selectedDate: new Date(),
       dates: [],
-      action: 'Submit'
+      action: 'Submit',
+      error: '',
+      prefillInfo: {
+        title: '',
+        email: ''
+      }
     };
     return _this;
   }
@@ -27437,6 +27446,7 @@ var Home = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.listener = _appointment_store2.default.addListener(this.receiveChange);
+      this.error = _error_store2.default.addListener(this.receiveError);
       _appointment_actions2.default.fetchAppointments();
     }
   }, {
@@ -27455,17 +27465,29 @@ var Home = function (_React$Component) {
       });
     }
   }, {
-    key: 'updateForm',
-    value: function updateForm(info) {
-      this.setState({ formInfo: info });
+    key: 'receiveError',
+    value: function receiveError() {
+      var error = _error_store2.default.currentError().responseJSON[0];
+      var that = this;
+      that.setState({ error: error });
+      that.timeout = window.setTimeout(function () {
+        that.setState({ error: '' });
+      }, 3000);
     }
   }, {
     key: 'makeAppointment',
-    value: function makeAppointment() {
+    value: function makeAppointment(data) {
+      this.state.currentMonth.setDate(this.state.selectedDate);
+      var date = this.state.currentMonth;
+      var appointmentInfo = {
+        appointment_date: date,
+        title: this.state.formInfo.description,
+        email: this.state.formInfo.email
+      };
       if (this.state.action === 'Update') {
-        _appointment_actions2.default.updateAppointment(this.selectedAppointment, this.state.formInfo);
+        _appointment_actions2.default.updateAppointment(appointmentInfo, this.state.formInfo);
       } else {
-        _appointment_actions2.default.createAppointment(this.state.formInfo);
+        _appointment_actions2.default.createAppointment(appointmentInfo);
       }
     }
   }, {
@@ -27474,11 +27496,14 @@ var Home = function (_React$Component) {
       var _this2 = this;
 
       this.selectedAppointment = {};
-      this.setState({ action: 'Submit' });
+      this.setState({ action: 'Submit', error: '', prefillInfo: {
+          title: '', email: ''
+        } });
       var selectedAppointment = [];
       if (this.state.appointments) {
         selectedAppointment = this.state.appointments.filter(function (appt) {
           var testDate = new Date(appt.appointment_date);
+          testDate.setDate(testDate.getDate() + 1);
           return testDate.getMonth() === _this2.state.currentMonth.getMonth() && testDate.getYear() === _this2.state.currentMonth.getYear() && testDate.getDate() === date;
         });
       }
@@ -27490,7 +27515,13 @@ var Home = function (_React$Component) {
   }, {
     key: 'updateAppointment',
     value: function updateAppointment(e) {
-      this.setState({ action: 'Update' });
+      var email = this.selectedAppointment.email;
+      var title = this.selectedAppointment.title;
+      var prefill = {
+        email: email,
+        title: title
+      };
+      this.setState({ action: 'Update', prefillInfo: prefill });
     }
   }, {
     key: 'deleteAppointment',
@@ -27508,7 +27539,9 @@ var Home = function (_React$Component) {
     value: function receiveChange() {
       var appointments = _appointment_store2.default.allAppointments();
       var dates = appointments.map(function (date) {
-        return new Date(date.appointment_date);
+        var newDate = new Date(date.appointment_date);
+        newDate.setDate(newDate.getDate() + 1);
+        return new Date(newDate);
       });
       this.setState({ appointments: appointments, dates: dates });
       this.forceUpdate();
@@ -27535,15 +27568,23 @@ var Home = function (_React$Component) {
           'Delete'
         )
       )] : "";
+      var _hideError = this.state.error === "" ? "hidden" : "";
+      var _buttonColor = this.state.action === "Update" ? "orange" : "blue";
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(_nav_bar2.default, { makeAppointment: this.makeAppointment,
           changeMonth: this.changeMonth,
           currentMonth: this.state.currentMonth }),
-        _react2.default.createElement(_form2.default, { updateChanges: this.updateForm,
-          submitForm: this.makeAppointment,
-          buttonText: this.state.action }),
+        _react2.default.createElement(_form2.default, { submitForm: this.makeAppointment,
+          buttonColor: _buttonColor,
+          buttonText: this.state.action,
+          prefillInfo: this.state.prefillInfo }),
+        _react2.default.createElement(
+          'div',
+          { className: 'errors ' + _hideError },
+          this.state.error
+        ),
         _react2.default.createElement(_calendar2.default, { selectedDate: this.state.selectedDate,
           selectDate: this.setDate,
           appointments: this.state.dates,
@@ -28023,19 +28064,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 module.exports = {
   fetchAppointments: function fetchAppointments() {
-    _appointment_api2.default.fetchAppointments(this.receiveAllAppointments);
+    _appointment_api2.default.fetchAppointments(this.receiveAllAppointments, this.receiveError);
   },
   fetchAppointment: function fetchAppointment(id) {
-    _appointment_api2.default.fetchAppointment(id, this.receiveAppointment);
+    _appointment_api2.default.fetchAppointment(id, this.receiveAppointment, this.receiveError);
   },
   createAppointment: function createAppointment(data) {
-    _appointment_api2.default.createAppointment(data, this.receiveAppointment);
+    _appointment_api2.default.createAppointment(data, this.receiveAppointment, this.receiveError);
   },
   updateAppointment: function updateAppointment(data) {
-    _appointment_api2.default.updateAppointment(data, this.receiveAppointment);
+    _appointment_api2.default.updateAppointment(data, this.receiveAppointment, this.receiveError);
   },
-  deleteAppointment: function deleteAppointment(id) {
-    _appointment_api2.default.removeAppointment(id, this.removeAppointment);
+  deleteAppointment: function deleteAppointment(data) {
+    _appointment_api2.default.removeAppointment(data, this.removeAppointment, this.receiveError);
   },
   receiveAppointment: function receiveAppointment(appointment) {
     _dispatcher2.default.dispatch({
@@ -28053,6 +28094,12 @@ module.exports = {
     _dispatcher2.default.dispatch({
       actionType: _appointment_constants2.default.APPOINTMENT_REMOVED,
       data: appointment
+    });
+  },
+  receiveError: function receiveError(error) {
+    _dispatcher2.default.dispatch({
+      actionType: _appointment_constants2.default.ERROR_RECEIVED,
+      data: error
     });
   }
 };
@@ -28075,7 +28122,7 @@ module.exports = new Dispatcher();
 'use strict';
 
 module.exports = {
-  createAppointment: function createAppointment(data, successCB) {
+  createAppointment: function createAppointment(data, successCB, errorCB) {
     $.ajax({
       url: '/appointments',
       type: 'POST',
@@ -28084,11 +28131,11 @@ module.exports = {
         successCB(resp);
       },
       error: function error(resp) {
-        console.log(resp);
+        errorCB(resp);
       }
     });
   },
-  fetchAppointment: function fetchAppointment(id, successCB) {
+  fetchAppointment: function fetchAppointment(id, successCB, errorCB) {
     $.ajax({
       url: '/appointments/' + id,
       data: { params: id },
@@ -28096,11 +28143,11 @@ module.exports = {
         successCB(resp);
       },
       error: function error(resp) {
-        console.log(resp);
+        errorCB(resp);
       }
     });
   },
-  updateAppointment: function updateAppointment(data, successCB) {
+  updateAppointment: function updateAppointment(data, successCB, errorCB) {
     $.ajax({
       url: '/appointments',
       type: 'PATCH',
@@ -28109,11 +28156,11 @@ module.exports = {
         successCB(resp);
       },
       error: function error(resp) {
-        console.log(resp);
+        errorCB(resp);
       }
     });
   },
-  fetchAppointments: function fetchAppointments(successCB) {
+  fetchAppointments: function fetchAppointments(successCB, errorCB) {
     $.ajax({
       url: '/appointments/',
       type: 'GET',
@@ -28121,20 +28168,19 @@ module.exports = {
         successCB(resp);
       },
       error: function error(resp) {
-        console.log(resp);
+        errorCB(resp);
       }
     });
   },
-  removeAppointment: function removeAppointment(id, successCB) {
+  removeAppointment: function removeAppointment(data, successCB, errorCB) {
     $.ajax({
-      url: '/appointments/' + id,
+      url: '/appointments/' + data.id,
       type: 'DELETE',
-      data: { params: id },
       success: function success(resp) {
         successCB(resp);
       },
       error: function error(resp) {
-        console.log(resp);
+        errorCB(resp);
       }
     });
   }
@@ -28634,7 +28680,8 @@ module.exports = FluxStoreGroup;
 module.exports = {
   APPOINTMENT_RECEIVED: 'APPOINTMENT_RECEIVED',
   APPOINTMENT_REMOVED: 'APPOINTMENT_REMOVED',
-  APPOINTMENTS_RECEIVED: 'APPOINTMENTS_RECEIVED'
+  APPOINTMENTS_RECEIVED: 'APPOINTMENTS_RECEIVED',
+  ERROR_RECEIVED: 'ERROR_RECEIVED'
 };
 
 /***/ },
@@ -28677,7 +28724,7 @@ function _removeAppointment(appointment) {
   _appointments.splice(_appointments.indexOf(appointment), 1);
 }
 
-AppointmentStore.currentMove = function () {
+AppointmentStore.currentAppointment = function () {
   return _currentAppointment;
 };
 
@@ -35055,9 +35102,6 @@ var Form = function (_React$Component) {
   }
 
   _createClass(Form, [{
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps() {}
-  }, {
     key: "setEmail",
     value: function setEmail(e) {
       e.preventDefault();
@@ -35077,6 +35121,10 @@ var Form = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var email = this.props.prefillInfo.email;
+      var _email = email !== '' ? email : 'Enter email';
+      var description = this.props.prefillInfo.title;
+      var _description = description !== '' ? email : 'Enter purpose';
       return _react2.default.createElement(
         "div",
         null,
@@ -35088,21 +35136,22 @@ var Form = function (_React$Component) {
             null,
             _react2.default.createElement("input", { type: "text", onChange: this.setEmail,
               value: this.state.email,
-              placeholder: "Enter email" })
+              placeholder: _email })
           ),
           _react2.default.createElement(
             "li",
             null,
             _react2.default.createElement("input", { type: "text", onChange: this.setDescription,
               value: this.state.description,
-              placeholder: "Enter Description" })
+              placeholder: _description })
           ),
           _react2.default.createElement(
             "li",
             null,
             _react2.default.createElement(
               "div",
-              { onClick: this.submit, className: "submit-button" },
+              { onClick: this.submit,
+                className: "submit-button " + this.props.buttonColor },
               this.props.buttonText
             )
           )
@@ -35118,6 +35167,49 @@ exports.default = Form;
 
 
 Form.propTypes = {};
+
+/***/ },
+/* 265 */,
+/* 266 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+'use strict';
+
+var _dispatcher = __webpack_require__(241);
+
+var _dispatcher2 = _interopRequireDefault(_dispatcher);
+
+var _appointment_constants = __webpack_require__(248);
+
+var _appointment_constants2 = _interopRequireDefault(_appointment_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Store = __webpack_require__(261).Store;
+
+var ErrorStore = new Store(_dispatcher2.default);
+
+var _currentError = "";
+
+function _resetError(error) {
+  _currentError = error;
+}
+
+ErrorStore.currentError = function () {
+  return _currentError;
+};
+
+ErrorStore.__onDispatch = function (payload) {
+  switch (payload.actionType) {
+    case _appointment_constants2.default.ERROR_RECEIVED:
+      _resetError(payload.data);
+      ErrorStore.__emitChange();
+      break;
+  }
+};
+
+module.exports = ErrorStore;
 
 /***/ }
 /******/ ]);

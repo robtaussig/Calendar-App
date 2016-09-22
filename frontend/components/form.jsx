@@ -13,10 +13,6 @@ export default class Form extends React.Component {
     };
   }
 
-  componentWillReceiveProps () {
-
-  }
-
   setEmail (e) {
     e.preventDefault();
     this.setState({email: e.currentTarget.value});
@@ -32,21 +28,26 @@ export default class Form extends React.Component {
   }
 
   render() {
+    let email = this.props.prefillInfo.email;
+    let _email = email !== '' ? email : 'Enter email';
+    let description = this.props.prefillInfo.title;
+    let _description = description !== '' ? email : 'Enter purpose';
     return (
       <div>
         <ul className="form">
           <li>
             <input type="text" onChange={this.setEmail}
               value={this.state.email}
-              placeholder="Enter email"/>
+              placeholder={_email}/>
           </li>
           <li>
             <input type="text" onChange={this.setDescription}
               value={this.state.description}
-              placeholder="Enter Description"/>
+              placeholder={_description}/>
           </li>
           <li>
-            <div onClick={this.submit} className="submit-button">
+            <div onClick={this.submit}
+              className={`submit-button ${this.props.buttonColor}`}>
               {this.props.buttonText}
             </div>
           </li>

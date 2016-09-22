@@ -4,6 +4,7 @@ import AppointmentActions from '../actions/appointment_actions';
 import AppointmentStore from '../stores/appointment_store';
 import NavBar from './nav_bar';
 import Form from './form';
+import ErrorStore from '../stores/error_store';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -11,23 +12,29 @@ export default class Home extends React.Component {
     this.receiveChange = this.receiveChange.bind(this);
     this.changeMonth = this.changeMonth.bind(this);
     this.makeAppointment = this.makeAppointment.bind(this);
-    this.updateForm = this.updateForm.bind(this);
     this.setDate = this.setDate.bind(this);
     this.updateAppointment = this.updateAppointment.bind(this);
     this.deleteAppointment = this.deleteAppointment.bind(this);
     this.selectedAppointment = {};
+    this.receiveError = this.receiveError.bind(this);
     this.state = ({
       appointments: [],
       currentMonth: new Date(),
       formInfo: {},
       selectedDate: new Date(),
       dates: [],
-      action: 'Submit'
+      action: 'Submit',
+      error: '',
+      prefillInfo: {
+        title: '',
+        email: ''
+      }
     });
   }
 
   componentDidMount () {
     this.listener = AppointmentStore.addListener(this.receiveChange);
+    this.error = ErrorStore.addListener(this.receiveError);
     AppointmentActions.fetchAppointments();
   }
 
@@ -44,25 +51,40 @@ export default class Home extends React.Component {
     });
   }
 
-  updateForm (info) {
-    this.setState({formInfo: info});
+  receiveError () {
+    let error = ErrorStore.currentError().responseJSON[0];
+    let that = this;
+    that.setState({error: error});
+    that.timeout = window.setTimeout(() => {
+      that.setState({error: ''});
+    }, 3000);
   }
 
-  makeAppointment () {
+  makeAppointment (data) {
+    this.state.currentMonth.setDate(this.state.selectedDate);
+    let date = this.state.currentMonth;
+    let appointmentInfo = {
+      appointment_date: date,
+      title: this.state.formInfo.description,
+      email: this.state.formInfo.email
+    };
     if (this.state.action === 'Update') {
-      AppointmentActions.updateAppointment(this.selectedAppointment,this.state.formInfo);
+      AppointmentActions.updateAppointment(appointmentInfo,this.state.formInfo);
     } else {
-      AppointmentActions.createAppointment(this.state.formInfo);
+      AppointmentActions.createAppointment(appointmentInfo);
     }
   }
 
   setDate (date) {
     this.selectedAppointment = {};
-    this.setState({action: 'Submit'});
+    this.setState({action: 'Submit', error: '', prefillInfo: {
+      title: '', email: ''
+    }});
     let selectedAppointment = [];
     if ( this.state.appointments ) {
       selectedAppointment = this.state.appointments.filter(appt => {
         let testDate = new Date(appt.appointment_date);
+        testDate.setDate(testDate.getDate() + 1);
         return (
           testDate.getMonth() === this.state.currentMonth.getMonth() &&
           testDate.getYear() === this.state.currentMonth.getYear() &&
@@ -77,7 +99,13 @@ export default class Home extends React.Component {
   }
 
   updateAppointment (e) {
-    this.setState({action: 'Update'});
+    let email = this.selectedAppointment.email;
+    let title = this.selectedAppointment.title;
+    let prefill = {
+      email: email,
+      title: title
+    };
+    this.setState({action: 'Update', prefillInfo: prefill});
   }
 
   deleteAppointment (e) {
@@ -91,7 +119,11 @@ export default class Home extends React.Component {
 
   receiveChange() {
     let appointments = AppointmentStore.allAppointments();
-    let dates = appointments.map(date => new Date(date.appointment_date));
+    let dates = appointments.map(date => {
+      let newDate = new Date(date.appointment_date);
+      newDate.setDate(newDate.getDate() + 1);
+      return new Date(newDate);
+    });
     this.setState({appointments: appointments, dates: dates});
     this.forceUpdate();
   }
@@ -102,14 +134,18 @@ export default class Home extends React.Component {
     let _buttons = this.selectedAppointment.email ?
     [<li><div onClick={this.updateAppointment} className="update">Update!</div></li>,
     <li><div onClick={this.deleteAppointment} className="delete">Delete</div></li>] : "";
+    let _hideError = this.state.error === "" ? "hidden" : "";
+    let _buttonColor = this.state.action === "Update" ? "orange" : "blue";
     return (
       <div>
         <NavBar makeAppointment={this.makeAppointment}
           changeMonth={this.changeMonth}
           currentMonth={this.state.currentMonth}/>
-        <Form updateChanges={this.updateForm}
-          submitForm={this.makeAppointment}
-          buttonText={this.state.action}/>
+        <Form submitForm={this.makeAppointment}
+          buttonColor={_buttonColor}
+          buttonText={this.state.action}
+          prefillInfo={this.state.prefillInfo}/>
+        <div className={`errors ${_hideError}`}>{this.state.error}</div>
         <Calendar selectedDate={this.state.selectedDate}
           selectDate={this.setDate}
           appointments={this.state.dates}

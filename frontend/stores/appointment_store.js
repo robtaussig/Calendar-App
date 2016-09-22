@@ -23,7 +23,7 @@ function _removeAppointment (appointment) {
   _appointments.splice(_appointments.indexOf(appointment), 1);
 }
 
-AppointmentStore.currentMove = function () {
+AppointmentStore.currentAppointment = function () {
   return _currentAppointment;
 };
 

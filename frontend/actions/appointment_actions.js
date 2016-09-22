@@ -5,23 +5,23 @@ import AppointmentApi from '../utils/appointment_api.js';
 module.exports = {
 
   fetchAppointments () {
-    AppointmentApi.fetchAppointments(this.receiveAllAppointments);
+    AppointmentApi.fetchAppointments(this.receiveAllAppointments, this.receiveError);
   },
 
   fetchAppointment (id) {
-    AppointmentApi.fetchAppointment(id,this.receiveAppointment);
+    AppointmentApi.fetchAppointment(id,this.receiveAppointment, this.receiveError);
   },
 
   createAppointment (data) {
-    AppointmentApi.createAppointment(data,this.receiveAppointment);
+    AppointmentApi.createAppointment(data,this.receiveAppointment, this.receiveError);
   },
 
   updateAppointment (data) {
-    AppointmentApi.updateAppointment(data,this.receiveAppointment);
+    AppointmentApi.updateAppointment(data,this.receiveAppointment, this.receiveError);
   },
 
-  deleteAppointment (id) {
-    AppointmentApi.removeAppointment(id,this.removeAppointment);
+  deleteAppointment (data) {
+    AppointmentApi.removeAppointment(data,this.removeAppointment, this.receiveError);
   },
 
   receiveAppointment (appointment) {
@@ -42,6 +42,13 @@ module.exports = {
     AppDispatcher.dispatch({
       actionType: AppointmentConstants.APPOINTMENT_REMOVED,
       data: appointment
+    });
+  },
+
+  receiveError (error) {
+    AppDispatcher.dispatch({
+      actionType: AppointmentConstants.ERROR_RECEIVED,
+      data: error
     });
   }
 };

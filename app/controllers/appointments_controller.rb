@@ -6,7 +6,7 @@ class AppointmentsController < ApplicationController
   def create
     @appointment = Appointment.new(appointment_params)
     if @appointment.save
-      render :show  
+      render :show
     else
       @errors = @appointment.errors.full_messages
       render json: @errors, status: 401
@@ -16,7 +16,7 @@ class AppointmentsController < ApplicationController
   def destroy
     @appointment = Appointment.find(params[:id])
     @appointment.destroy!
-    render :show
+    render :root
   end
 
   def index

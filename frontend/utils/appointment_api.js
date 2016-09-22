@@ -1,6 +1,6 @@
 module.exports = {
 
-  createAppointment (data, successCB) {
+  createAppointment (data, successCB, errorCB) {
     $.ajax({
       url: '/appointments',
       type: 'POST',
@@ -9,12 +9,12 @@ module.exports = {
         successCB(resp);
       },
       error: (resp) => {
-        console.log(resp);
+        errorCB(resp);
       }
     });
   },
 
-  fetchAppointment (id, successCB) {
+  fetchAppointment (id, successCB, errorCB) {
     $.ajax({
       url: '/appointments/' + id,
       data: {params: id},
@@ -22,12 +22,12 @@ module.exports = {
         successCB(resp);
       },
       error: (resp) => {
-        console.log(resp);
+        errorCB(resp);
       }
     });
   },
 
-  updateAppointment (data, successCB) {
+  updateAppointment (data, successCB, errorCB) {
     $.ajax({
       url: '/appointments',
       type: 'PATCH',
@@ -36,12 +36,12 @@ module.exports = {
         successCB(resp);
       },
       error: (resp) => {
-        console.log(resp);
+        errorCB(resp);
       }
     });
   },
 
-  fetchAppointments (successCB) {
+  fetchAppointments (successCB, errorCB) {
     $.ajax({
       url: '/appointments/',
       type: 'GET',
@@ -49,21 +49,20 @@ module.exports = {
         successCB(resp);
       },
       error: (resp) => {
-        console.log(resp);
+        errorCB(resp);
       }
     });
   },
 
-  removeAppointment (id, successCB) {
+  removeAppointment (data, successCB, errorCB) {
     $.ajax({
-      url: '/appointments/' + id,
+      url: '/appointments/' + data.id,
       type: 'DELETE',
-      data: {params: id},
       success: (resp) => {
         successCB(resp);
       },
       error: (resp) => {
-        console.log(resp);
+        errorCB(resp);
       }
     });
   }

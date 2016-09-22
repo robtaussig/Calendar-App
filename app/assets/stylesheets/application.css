@@ -101,6 +101,21 @@
    cursor: default;
  }
 
+ div.errors {
+   top: 5%;
+   right: 15%;
+   position: absolute;
+   padding: 20px 30px;
+   border: 1px solid #000;
+   border-radius: 5px;
+   background-color: white;
+   box-shadow: 5px 5px 5px #000;
+ }
+
+ div.hidden {
+   display: none;
+ }
+
  div.nav-bar-top {
    position: relative;
    height: 50px;
@@ -147,6 +162,14 @@
    background-color: blue;
    color: white;
    cursor: pointer;
+ }
+
+ div.submit-button.orange {
+   background-color: orange;
+ }
+
+ div.submit-button.blue {
+   background-color: steelblue;
  }
 
  ul.appt-info {
