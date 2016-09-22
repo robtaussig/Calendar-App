@@ -1,23 +1,27 @@
-const AppDispatcher = require('../dispatcher/dispatcher.js');
-const AppointmentConstants = require('../constants/move_constants.js');
-const AppointmentApi = require('../utils/appointment_api.js');
+import AppDispatcher from '../dispatcher/dispatcher.js';
+import AppointmentConstants from '../constants/appointment_constants.js';
+import AppointmentApi from '../utils/appointment_api.js';
 
 module.exports = {
 
   fetchAppointments () {
-    AppointmentApi.fetchAppointments(this.receiveAppointments);
+    AppointmentApi.fetchAppointments(this.receiveAllAppointments);
   },
 
   fetchAppointment (id) {
-    AppointmentApi.fetchAppointment(this.receiveAppointment);
+    AppointmentApi.fetchAppointment(id,this.receiveAppointment);
   },
 
   createAppointment (data) {
-    AppointmentApi.createAppointment(this.receiveAppointment);
+    AppointmentApi.createAppointment(data,this.receiveAppointment);
+  },
+
+  updateAppointment (data) {
+    AppointmentApi.updateAppointment(data,this.receiveAppointment);
   },
 
   deleteAppointment (id) {
-    AppointmentApi.removeAppointment(this.removeAppointment);
+    AppointmentApi.removeAppointment(id,this.removeAppointment);
   },
 
   receiveAppointment (appointment) {

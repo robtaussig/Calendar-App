@@ -1,6 +1,6 @@
 const Store = require('flux/utils').Store;
-const AppDispatcher = require('../dispatcher/dispatcher.js');
-const AppointmentConstants = require('../constants/appointment_constants.js');
+import AppDispatcher from '../dispatcher/dispatcher.js';
+import AppointmentConstants from '../constants/appointment_constants.js';
 const AppointmentStore = new Store(AppDispatcher);
 
 let _currentAppointment = {

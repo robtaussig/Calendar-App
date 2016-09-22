@@ -13,3 +13,150 @@
  *= require_tree .
  *= require_self
  */
+
+ html, body, header, nav, h1, a,
+ ul, li, strong, main, button, i,
+ section, img, div, h2, p, form,
+ fieldset, label, input, textarea,
+ span, article, footer, time, small {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   outline: 0;
+   font: inherit;
+   color: inherit;
+   text-align: inherit;
+   text-decoration: inherit;
+   vertical-align: inherit;
+   box-sizing: inherit;
+   list-style: none;
+   background: transparent;
+   font-family: "Liberation Sans", "HelveticaNeue-Light", "Helvetica Neue Light",
+   "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+   // -webkit-font-smoothing: antialiased;
+ }
+
+ div.indiv-day {
+   width: 12vmax;
+   height: 4vmax;
+   border-right: 1px solid #000;
+   border-bottom: 1px solid #000;
+   text-align: center;
+   line-height: 4vmax;
+ }
+
+ div.selectable {
+   cursor: pointer;
+ }
+
+ div.selected {
+   background-color: limegreen;
+ }
+
+ div.hasAppointment {
+   background-color: darkgreen;
+ }
+
+ ul.days {
+   width: 100%;
+ }
+
+ ul.days li {
+   float: left;
+ }
+
+ ul.weeks {
+   float:left;
+   position:relative;
+   margin-left: 5vmax;
+   margin-right: 5vmax;
+   margin-top: 100px;
+   border-top: 1px solid #000;
+   border-left: 1px solid #000;
+ }
+
+ ul.weeks li.null li div {
+   background-color: #b33333;
+   cursor: default;
+ }
+
+ ul.nav-bar {
+   position: absolute;
+   left: 50%;
+   transform: translateX(-50%);
+   margin: 0 auto;
+ }
+
+ ul.nav-bar li {
+   float: left;
+   line-height:50px;
+   cursor: pointer;
+ }
+
+ ul.nav-bar li.current-month {
+   width: 350px;
+   text-align: center;
+   font-size: 24px;
+   font-weight: 700;
+   cursor: default;
+ }
+
+ div.nav-bar-top {
+   position: relative;
+   height: 50px;
+   border-bottom: 1px solid #000;
+   box-shadow: 3px 4px 5px #ccc;
+   background-color: aliceblue;
+ }
+
+ ul.form li {
+   float: left;
+   margin: 20px 30px;;
+ }
+
+ ul.form li input {
+   border: 1px solid #000;
+   width: 300px;
+   padding: 10px;
+   border-radius: 5px;
+ }
+
+ ul.form li input:focus {
+   border-color: blue;
+ }
+
+ ul.form {
+   position: absolute;
+   top: 60px;
+   left: 50%;
+   width: 70vmax;
+   transform: translateX(-50%);
+ }
+
+ div.submit-button {
+   border: 1px solid #000;
+   width: 100px;
+   padding: 10px;
+   text-align: center;
+   border-radius: 5px;
+   font-weight: 700;
+   background-color: steelblue;
+ }
+
+ div.submit-button:hover {
+   background-color: blue;
+   color: white;
+   cursor: pointer;
+ }
+
+ ul.appt-info {
+   position: relative;
+   width: 900px;
+   margin: 20px;
+ }
+
+ ul.appt-info li {
+   margin-left: 200px;
+   float: left;
+   padding: 20px;
+ }
