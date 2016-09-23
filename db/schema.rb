@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160922150717) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "appointments", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
@@ -24,6 +27,6 @@ ActiveRecord::Schema.define(version: 20160922150717) do
     t.string   "email"
   end
 
-  add_index "appointments", ["appointment_date", "time"], name: "index_appointments_on_appointment_date_and_time", unique: true
+  add_index "appointments", ["appointment_date", "time"], name: "index_appointments_on_appointment_date_and_time", unique: true, using: :btree
 
 end
