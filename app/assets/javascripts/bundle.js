@@ -27430,7 +27430,7 @@ var Home = function (_React$Component) {
       appointments: [],
       currentMonth: new Date(),
       formInfo: {},
-      selectedDate: new Date(),
+      selectedDate: new Date().getDate(),
       dates: [],
       action: 'Submit',
       error: '',
@@ -27477,17 +27477,23 @@ var Home = function (_React$Component) {
   }, {
     key: 'makeAppointment',
     value: function makeAppointment(data) {
-      this.state.currentMonth.setDate(this.state.selectedDate);
+      if (this.state.selectedDate) {
+        this.state.currentMonth.setDate(this.state.selectedDate);
+      } else {
+        this.setState({ error: 'You must select a date first' });
+      }
       var date = this.state.currentMonth;
       var appointmentInfo = {
         appointment_date: date,
         title: data.description,
         email: data.email
       };
-      if (this.state.action === 'Update') {
-        _appointment_actions2.default.updateAppointment(appointmentInfo, this.selectedAppointment);
-      } else {
-        _appointment_actions2.default.createAppointment(appointmentInfo);
+      if (this.state.selectedDate) {
+        if (this.state.action === 'Update') {
+          _appointment_actions2.default.updateAppointment(appointmentInfo, this.selectedAppointment);
+        } else {
+          _appointment_actions2.default.createAppointment(appointmentInfo);
+        }
       }
     }
   }, {

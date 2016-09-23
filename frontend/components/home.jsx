@@ -21,7 +21,7 @@ export default class Home extends React.Component {
       appointments: [],
       currentMonth: new Date(),
       formInfo: {},
-      selectedDate: new Date(),
+      selectedDate: new Date().getDate(),
       dates: [],
       action: 'Submit',
       error: '',
@@ -61,17 +61,23 @@ export default class Home extends React.Component {
   }
 
   makeAppointment (data) {
-    this.state.currentMonth.setDate(this.state.selectedDate);
+    if (this.state.selectedDate) {
+      this.state.currentMonth.setDate(this.state.selectedDate);
+    } else {
+      this.setState({error: 'You must select a date first'});
+    }
     let date = this.state.currentMonth;
     let appointmentInfo = {
       appointment_date: date,
       title: data.description,
       email: data.email
     };
-    if (this.state.action === 'Update') {
-      AppointmentActions.updateAppointment(appointmentInfo,this.selectedAppointment);
-    } else {
-      AppointmentActions.createAppointment(appointmentInfo);
+    if (this.state.selectedDate) {
+      if (this.state.action === 'Update') {
+        AppointmentActions.updateAppointment(appointmentInfo,this.selectedAppointment);
+      } else {
+        AppointmentActions.createAppointment(appointmentInfo);
+      }
     }
   }
 

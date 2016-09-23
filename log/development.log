@@ -24660,3 +24660,949 @@ WHERE c.contype = 'f'
   AND t3.nspname = ANY (current_schemas(false))
 ORDER BY c.conname
 
+
+
+Started GET "/" for ::1 at 2016-09-22 20:12:04 -0400
+Processing by StaticPagesController#root as HTML
+  Rendered static_pages/root.html within layouts/application (0.5ms)
+Completed 200 OK in 202ms (Views: 197.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/appointments/" for ::1 at 2016-09-22 20:12:05 -0400
+Processing by AppointmentsController#index as */*
+  [1m[36mAppointment Load (1.3ms)[0m  [1mSELECT "appointments".* FROM "appointments"[0m
+  Rendered appointments/index.json.jbuilder (23.0ms)
+Completed 200 OK in 57ms (Views: 41.8ms | ActiveRecord: 2.5ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:12:09 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Fri Sep 23 2016 20:12:05 GMT-0400 (EDT)", "title"=>"asdfasdf", "email"=>"asdfasf"}}
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mAppointment Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-09-23' LIMIT 1[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "appointments" ("title", "appointment_date", "email", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "asdfasdf"], ["appointment_date", "2016-09-23"], ["email", "asdfasf"], ["created_at", "2016-09-23 00:12:09.516038"], ["updated_at", "2016-09-23 00:12:09.516038"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  Rendered appointments/show.json.jbuilder (2.0ms)
+Completed 200 OK in 103ms (Views: 12.5ms | ActiveRecord: 4.0ms)
+
+
+Started DELETE "/appointments/30" for ::1 at 2016-09-22 20:12:39 -0400
+Processing by AppointmentsController#destroy as */*
+  Parameters: {"id"=>"30"}
+  [1m[35mAppointment Load (0.7ms)[0m  SELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT 1  [["id", 30]]
+  [1m[36m (0.4ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  DELETE FROM "appointments" WHERE "appointments"."id" = ?  [["id", 30]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  Rendered appointments/root.html within layouts/application (0.3ms)
+Completed 200 OK in 218ms (Views: 173.1ms | ActiveRecord: 3.1ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:12:41 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Fri Sep 23 2016 20:12:05 GMT-0400 (EDT)", "title"=>"asdfasdf", "email"=>"asdfasf"}}
+  [1m[35m (0.7ms)[0m  begin transaction
+  [1m[36mAppointment Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-09-23' LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "appointments" ("title", "appointment_date", "email", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "asdfasdf"], ["appointment_date", "2016-09-23"], ["email", "asdfasf"], ["created_at", "2016-09-23 00:12:41.380187"], ["updated_at", "2016-09-23 00:12:41.380187"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  Rendered appointments/show.json.jbuilder (2.8ms)
+Completed 200 OK in 52ms (Views: 11.9ms | ActiveRecord: 3.4ms)
+
+
+Started DELETE "/appointments/31" for ::1 at 2016-09-22 20:12:44 -0400
+Processing by AppointmentsController#destroy as */*
+  Parameters: {"id"=>"31"}
+  [1m[35mAppointment Load (0.4ms)[0m  SELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT 1  [["id", 31]]
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.1ms)[0m  DELETE FROM "appointments" WHERE "appointments"."id" = ?  [["id", 31]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+  Rendered appointments/root.html within layouts/application (0.5ms)
+Completed 200 OK in 205ms (Views: 188.2ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/" for ::1 at 2016-09-22 20:42:49 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StaticPagesController#root as HTML
+  Rendered static_pages/root.html within layouts/application (1.6ms)
+Completed 200 OK in 1683ms (Views: 1669.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/appointments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:42:51 -0400
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:42:51 -0400
+
+
+Started GET "/assets/application.self-d8dc43b02001efbc0739659d65cf187f906f8bfca7c6daa35c220fbf046769c8.css?body=1" for ::1 at 2016-09-22 20:42:51 -0400
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2016-09-22 20:42:51 -0400
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2016-09-22 20:42:51 -0400
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for ::1 at 2016-09-22 20:42:51 -0400
+
+
+Started GET "/assets/bundle.self-33bed53157f7e658a79bc6779cbd3531dd07e7f43cd7c1ca91ec2646814802d7.js?body=1" for ::1 at 2016-09-22 20:42:51 -0400
+
+
+Started GET "/assets/appointments.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:42:51 -0400
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:42:51 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-09-22 20:42:51 -0400
+
+
+Started GET "/appointments/" for ::1 at 2016-09-22 20:42:52 -0400
+Processing by AppointmentsController#index as */*
+  [1m[35mAppointment Load (1.4ms)[0m  SELECT "appointments".* FROM "appointments"
+  Rendered appointments/index.json.jbuilder (7.9ms)
+Completed 200 OK in 19ms (Views: 13.8ms | ActiveRecord: 2.4ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:42:53 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"NaN", "title"=>"", "email"=>""}}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mAppointment Exists (1.5ms)[0m  SELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+Completed 401 Unauthorized in 48ms (Views: 0.3ms | ActiveRecord: 6.8ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:42:54 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"NaN", "title"=>"", "email"=>""}}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+Completed 401 Unauthorized in 10ms (Views: 0.2ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:42:54 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"NaN", "title"=>"", "email"=>""}}
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAppointment Exists (0.4ms)[0m  SELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+Completed 401 Unauthorized in 6ms (Views: 0.1ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:42:54 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"NaN", "title"=>"", "email"=>""}}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+Completed 401 Unauthorized in 5ms (Views: 0.1ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:42:54 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"NaN", "title"=>"", "email"=>""}}
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAppointment Exists (0.4ms)[0m  SELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+Completed 401 Unauthorized in 6ms (Views: 0.1ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:42:54 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"NaN", "title"=>"", "email"=>""}}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+Completed 401 Unauthorized in 6ms (Views: 0.1ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:42:55 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"NaN", "title"=>"", "email"=>""}}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mAppointment Exists (0.3ms)[0m  SELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+Completed 401 Unauthorized in 5ms (Views: 0.1ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:42:55 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"NaN", "title"=>"", "email"=>""}}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+Completed 401 Unauthorized in 9ms (Views: 0.2ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:42:55 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"NaN", "title"=>"", "email"=>""}}
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mAppointment Exists (0.6ms)[0m  SELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+Completed 401 Unauthorized in 9ms (Views: 0.2ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:42:55 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"NaN", "title"=>"", "email"=>""}}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+Completed 401 Unauthorized in 6ms (Views: 0.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for ::1 at 2016-09-22 20:43:07 -0400
+Processing by StaticPagesController#root as HTML
+  Rendered static_pages/root.html within layouts/application (0.1ms)
+Completed 200 OK in 28ms (Views: 27.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/appointments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:43:07 -0400
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:43:07 -0400
+
+
+Started GET "/assets/application.self-d8dc43b02001efbc0739659d65cf187f906f8bfca7c6daa35c220fbf046769c8.css?body=1" for ::1 at 2016-09-22 20:43:07 -0400
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2016-09-22 20:43:07 -0400
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for ::1 at 2016-09-22 20:43:07 -0400
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2016-09-22 20:43:07 -0400
+
+
+Started GET "/assets/appointments.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:43:07 -0400
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:43:07 -0400
+
+
+Started GET "/assets/bundle.self-33bed53157f7e658a79bc6779cbd3531dd07e7f43cd7c1ca91ec2646814802d7.js?body=1" for ::1 at 2016-09-22 20:43:07 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-09-22 20:43:07 -0400
+
+
+Started GET "/appointments/" for ::1 at 2016-09-22 20:43:08 -0400
+Processing by AppointmentsController#index as */*
+  [1m[36mAppointment Load (0.5ms)[0m  [1mSELECT "appointments".* FROM "appointments"[0m
+  Rendered appointments/index.json.jbuilder (1.3ms)
+Completed 200 OK in 8ms (Views: 6.3ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:43:09 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"NaN", "title"=>"", "email"=>""}}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+Completed 401 Unauthorized in 6ms (Views: 0.3ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:43:09 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"NaN", "title"=>"", "email"=>""}}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mAppointment Exists (0.6ms)[0m  SELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+Completed 401 Unauthorized in 10ms (Views: 0.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/" for ::1 at 2016-09-22 20:43:11 -0400
+Processing by StaticPagesController#root as HTML
+  Rendered static_pages/root.html within layouts/application (0.0ms)
+Completed 200 OK in 84ms (Views: 83.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:43:11 -0400
+
+
+Started GET "/assets/appointments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:43:11 -0400
+
+
+Started GET "/assets/application.self-d8dc43b02001efbc0739659d65cf187f906f8bfca7c6daa35c220fbf046769c8.css?body=1" for ::1 at 2016-09-22 20:43:11 -0400
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2016-09-22 20:43:11 -0400
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2016-09-22 20:43:11 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-09-22 20:43:11 -0400
+
+
+Started GET "/assets/appointments.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:43:11 -0400
+
+
+Started GET "/assets/bundle.self-ca336ea980616f0423546999bc3b3242f87b485beca0bb0a016a789aed5f9112.js?body=1" for ::1 at 2016-09-22 20:43:11 -0400
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:43:11 -0400
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for ::1 at 2016-09-22 20:43:11 -0400
+
+
+Started GET "/appointments/" for ::1 at 2016-09-22 20:43:11 -0400
+Processing by AppointmentsController#index as */*
+  [1m[35mAppointment Load (0.5ms)[0m  SELECT "appointments".* FROM "appointments"
+  Rendered appointments/index.json.jbuilder (1.3ms)
+Completed 200 OK in 7ms (Views: 5.9ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:43:12 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Invalid Date", "title"=>"", "email"=>""}}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mAppointment Exists (0.5ms)[0m  SELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+Completed 401 Unauthorized in 9ms (Views: 0.3ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:43:13 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Invalid Date", "title"=>"", "email"=>""}}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+Completed 401 Unauthorized in 6ms (Views: 0.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/bundle.js.map" for ::1 at 2016-09-22 20:43:29 -0400
+
+
+Started GET "/" for ::1 at 2016-09-22 20:43:36 -0400
+Processing by StaticPagesController#root as HTML
+  Rendered static_pages/root.html within layouts/application (0.1ms)
+Completed 200 OK in 26ms (Views: 25.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/appointments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:43:36 -0400
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for ::1 at 2016-09-22 20:43:36 -0400
+
+
+Started GET "/assets/appointments.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:43:36 -0400
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2016-09-22 20:43:36 -0400
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:43:36 -0400
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2016-09-22 20:43:36 -0400
+
+
+Started GET "/assets/application.self-d8dc43b02001efbc0739659d65cf187f906f8bfca7c6daa35c220fbf046769c8.css?body=1" for ::1 at 2016-09-22 20:43:36 -0400
+
+
+Started GET "/assets/bundle.self-ca336ea980616f0423546999bc3b3242f87b485beca0bb0a016a789aed5f9112.js?body=1" for ::1 at 2016-09-22 20:43:36 -0400
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:43:36 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-09-22 20:43:36 -0400
+
+
+Started GET "/assets/bundle.js.map" for ::1 at 2016-09-22 20:43:37 -0400
+
+
+Started GET "/appointments/" for ::1 at 2016-09-22 20:43:37 -0400
+Processing by AppointmentsController#index as */*
+  [1m[36mAppointment Load (0.4ms)[0m  [1mSELECT "appointments".* FROM "appointments"[0m
+  Rendered appointments/index.json.jbuilder (1.3ms)
+Completed 200 OK in 8ms (Views: 7.0ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:43:38 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Invalid Date", "title"=>"", "email"=>""}}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+Completed 401 Unauthorized in 5ms (Views: 0.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for ::1 at 2016-09-22 20:43:47 -0400
+Processing by StaticPagesController#root as HTML
+  Rendered static_pages/root.html within layouts/application (0.0ms)
+Completed 200 OK in 16ms (Views: 15.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/appointments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:43:47 -0400
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2016-09-22 20:43:47 -0400
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:43:47 -0400
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2016-09-22 20:43:47 -0400
+
+
+Started GET "/assets/application.self-d8dc43b02001efbc0739659d65cf187f906f8bfca7c6daa35c220fbf046769c8.css?body=1" for ::1 at 2016-09-22 20:43:47 -0400
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for ::1 at 2016-09-22 20:43:47 -0400
+
+
+Started GET "/assets/appointments.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:43:47 -0400
+
+
+Started GET "/assets/bundle.self-ca336ea980616f0423546999bc3b3242f87b485beca0bb0a016a789aed5f9112.js?body=1" for ::1 at 2016-09-22 20:43:47 -0400
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:43:47 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-09-22 20:43:47 -0400
+
+
+Started GET "/assets/bundle.js.map" for ::1 at 2016-09-22 20:43:47 -0400
+
+
+Started GET "/appointments/" for ::1 at 2016-09-22 20:43:47 -0400
+Processing by AppointmentsController#index as */*
+  [1m[36mAppointment Load (0.5ms)[0m  [1mSELECT "appointments".* FROM "appointments"[0m
+  Rendered appointments/index.json.jbuilder (1.3ms)
+Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:43:51 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Thu Sep 08 2016 20:43:47 GMT-0400 (EDT)", "title"=>"asdf", "email"=>"adsf"}}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mAppointment Exists (1.4ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-09-08' LIMIT 1[0m
+  [1m[35mSQL (1.2ms)[0m  INSERT INTO "appointments" ("title", "appointment_date", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["title", "asdf"], ["appointment_date", "2016-09-08"], ["email", "adsf"], ["created_at", "2016-09-23 00:43:51.081913"], ["updated_at", "2016-09-23 00:43:51.081913"]]
+  [1m[36m (1.2ms)[0m  [1mCOMMIT[0m
+  Rendered appointments/show.json.jbuilder (0.5ms)
+Completed 200 OK in 18ms (Views: 5.6ms | ActiveRecord: 4.3ms)
+
+
+Started DELETE "/appointments/1" for ::1 at 2016-09-22 20:43:56 -0400
+Processing by AppointmentsController#destroy as */*
+  Parameters: {"id"=>"1"}
+  [1m[35mAppointment Load (1.1ms)[0m  SELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  DELETE FROM "appointments" WHERE "appointments"."id" = $1  [["id", 1]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  Rendered appointments/root.html within layouts/application (0.6ms)
+Completed 200 OK in 40ms (Views: 22.6ms | ActiveRecord: 2.7ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:44:00 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Fri Sep 02 2016 20:43:47 GMT-0400 (EDT)", "title"=>"asdf", "email"=>"adsf"}}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-09-02' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "appointments" ("title", "appointment_date", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["title", "asdf"], ["appointment_date", "2016-09-02"], ["email", "adsf"], ["created_at", "2016-09-23 00:44:00.888777"], ["updated_at", "2016-09-23 00:44:00.888777"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  Rendered appointments/show.json.jbuilder (0.2ms)
+Completed 200 OK in 9ms (Views: 3.9ms | ActiveRecord: 1.4ms)
+
+
+Started DELETE "/appointments/2" for ::1 at 2016-09-22 20:44:04 -0400
+Processing by AppointmentsController#destroy as */*
+  Parameters: {"id"=>"2"}
+  [1m[35mAppointment Load (0.6ms)[0m  SELECT  "appointments".* FROM "appointments" WHERE "appointments"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  DELETE FROM "appointments" WHERE "appointments"."id" = $1  [["id", 2]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  Rendered appointments/root.html within layouts/application (0.1ms)
+Completed 200 OK in 32ms (Views: 27.7ms | ActiveRecord: 1.8ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:44:07 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Wed Aug 31 2016 20:43:47 GMT-0400 (EDT)", "title"=>"asdf", "email"=>"adsf"}}
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.7ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-08-31' LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "appointments" ("title", "appointment_date", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["title", "asdf"], ["appointment_date", "2016-08-31"], ["email", "adsf"], ["created_at", "2016-09-23 00:44:07.407842"], ["updated_at", "2016-09-23 00:44:07.407842"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  Rendered appointments/show.json.jbuilder (0.3ms)
+Completed 200 OK in 14ms (Views: 6.5ms | ActiveRecord: 2.1ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:44:08 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Sun Jul 31 2016 20:43:47 GMT-0400 (EDT)", "title"=>"asdf", "email"=>"adsf"}}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-07-31' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "appointments" ("title", "appointment_date", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["title", "asdf"], ["appointment_date", "2016-07-31"], ["email", "adsf"], ["created_at", "2016-09-23 00:44:09.004080"], ["updated_at", "2016-09-23 00:44:09.004080"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  Rendered appointments/show.json.jbuilder (0.3ms)
+Completed 200 OK in 10ms (Views: 5.0ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:44:10 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Thu Jun 30 2016 20:43:47 GMT-0400 (EDT)", "title"=>"asdf", "email"=>"adsf"}}
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-06-30' LIMIT 1[0m
+  [1m[35mSQL (2.0ms)[0m  INSERT INTO "appointments" ("title", "appointment_date", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["title", "asdf"], ["appointment_date", "2016-06-30"], ["email", "adsf"], ["created_at", "2016-09-23 00:44:10.053856"], ["updated_at", "2016-09-23 00:44:10.053856"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  Rendered appointments/show.json.jbuilder (0.3ms)
+Completed 200 OK in 16ms (Views: 7.2ms | ActiveRecord: 3.5ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:44:10 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Tue May 31 2016 20:43:47 GMT-0400 (EDT)", "title"=>"asdf", "email"=>"adsf"}}
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-05-31' LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "appointments" ("title", "appointment_date", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["title", "asdf"], ["appointment_date", "2016-05-31"], ["email", "adsf"], ["created_at", "2016-09-23 00:44:10.825785"], ["updated_at", "2016-09-23 00:44:10.825785"]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  Rendered appointments/show.json.jbuilder (0.3ms)
+Completed 200 OK in 16ms (Views: 9.0ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/" for ::1 at 2016-09-22 20:45:46 -0400
+Processing by StaticPagesController#root as HTML
+  Rendered static_pages/root.html within layouts/application (0.0ms)
+Completed 200 OK in 443ms (Views: 442.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:45:46 -0400
+
+
+Started GET "/assets/bundle.self-8fe374c81f577cbfe330ba7d298219462a720053d3b137047fb3bed8d138930d.js?body=1" for ::1 at 2016-09-22 20:45:46 -0400
+
+
+Started GET "/assets/appointments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:45:47 -0400
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2016-09-22 20:45:47 -0400
+
+
+Started GET "/assets/application.self-d8dc43b02001efbc0739659d65cf187f906f8bfca7c6daa35c220fbf046769c8.css?body=1" for ::1 at 2016-09-22 20:45:47 -0400
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2016-09-22 20:45:47 -0400
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for ::1 at 2016-09-22 20:45:47 -0400
+
+
+Started GET "/assets/appointments.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:45:47 -0400
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:45:47 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-09-22 20:45:47 -0400
+
+
+Started GET "/assets/bundle.js.map" for ::1 at 2016-09-22 20:45:47 -0400
+
+
+Started GET "/appointments/" for ::1 at 2016-09-22 20:45:48 -0400
+Processing by AppointmentsController#index as */*
+  [1m[35mAppointment Load (0.6ms)[0m  SELECT "appointments".* FROM "appointments"
+  Rendered appointments/index.json.jbuilder (2.9ms)
+Completed 200 OK in 10ms (Views: 8.6ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:45:49 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Invalid Date", "title"=>"", "email"=>""}}
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mAppointment Exists (0.6ms)[0m  SELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+Completed 401 Unauthorized in 8ms (Views: 0.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/" for ::1 at 2016-09-22 20:45:54 -0400
+Processing by StaticPagesController#root as HTML
+  Rendered static_pages/root.html within layouts/application (0.1ms)
+Completed 200 OK in 232ms (Views: 231.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/appointments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:45:54 -0400
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:45:54 -0400
+
+
+Started GET "/assets/application.self-d8dc43b02001efbc0739659d65cf187f906f8bfca7c6daa35c220fbf046769c8.css?body=1" for ::1 at 2016-09-22 20:45:54 -0400
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2016-09-22 20:45:54 -0400
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2016-09-22 20:45:54 -0400
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for ::1 at 2016-09-22 20:45:54 -0400
+
+
+Started GET "/assets/appointments.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:45:54 -0400
+
+
+Started GET "/assets/bundle.self-a3237c6fb20a270f00c2e705839d9554cc79e9493cf730b8c2fd6a2b1aed9505.js?body=1" for ::1 at 2016-09-22 20:45:54 -0400
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:45:54 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-09-22 20:45:54 -0400
+
+
+Started GET "/assets/bundle.js.map" for ::1 at 2016-09-22 20:45:55 -0400
+
+
+Started GET "/appointments/" for ::1 at 2016-09-22 20:45:55 -0400
+Processing by AppointmentsController#index as */*
+  [1m[35mAppointment Load (0.6ms)[0m  SELECT "appointments".* FROM "appointments"
+  Rendered appointments/index.json.jbuilder (2.3ms)
+Completed 200 OK in 9ms (Views: 7.7ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:45:56 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Invalid Date", "title"=>"", "email"=>""}}
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAppointment Exists (0.4ms)[0m  SELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+Completed 401 Unauthorized in 5ms (Views: 0.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for ::1 at 2016-09-22 20:46:29 -0400
+Processing by StaticPagesController#root as HTML
+  Rendered static_pages/root.html within layouts/application (0.0ms)
+Completed 200 OK in 443ms (Views: 442.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/appointments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:46:29 -0400
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2016-09-22 20:46:29 -0400
+
+
+Started GET "/assets/application.self-d8dc43b02001efbc0739659d65cf187f906f8bfca7c6daa35c220fbf046769c8.css?body=1" for ::1 at 2016-09-22 20:46:29 -0400
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2016-09-22 20:46:29 -0400
+
+
+Started GET "/assets/appointments.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:46:29 -0400
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for ::1 at 2016-09-22 20:46:29 -0400
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:46:29 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-09-22 20:46:29 -0400
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:46:29 -0400
+
+
+Started GET "/assets/bundle.self-cbf36ebf273d6bd5faf312b088ccd5880cf8e86cba092b3b1e5b18f6eec7cb95.js?body=1" for ::1 at 2016-09-22 20:46:29 -0400
+
+
+Started GET "/assets/bundle.js.map" for ::1 at 2016-09-22 20:46:30 -0400
+
+
+Started GET "/appointments/" for ::1 at 2016-09-22 20:46:30 -0400
+Processing by AppointmentsController#index as */*
+  [1m[35mAppointment Load (0.4ms)[0m  SELECT "appointments".* FROM "appointments"
+  Rendered appointments/index.json.jbuilder (2.2ms)
+Completed 200 OK in 9ms (Views: 7.7ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:46:32 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Invalid Date", "title"=>"", "email"=>""}}
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mAppointment Exists (0.3ms)[0m  SELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+Completed 401 Unauthorized in 5ms (Views: 0.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for ::1 at 2016-09-22 20:46:42 -0400
+Processing by StaticPagesController#root as HTML
+  Rendered static_pages/root.html within layouts/application (0.1ms)
+Completed 200 OK in 20ms (Views: 19.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/appointments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:46:42 -0400
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:46:42 -0400
+
+
+Started GET "/assets/application.self-d8dc43b02001efbc0739659d65cf187f906f8bfca7c6daa35c220fbf046769c8.css?body=1" for ::1 at 2016-09-22 20:46:42 -0400
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2016-09-22 20:46:42 -0400
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2016-09-22 20:46:42 -0400
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for ::1 at 2016-09-22 20:46:42 -0400
+
+
+Started GET "/assets/appointments.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:46:42 -0400
+
+
+Started GET "/assets/bundle.self-cbf36ebf273d6bd5faf312b088ccd5880cf8e86cba092b3b1e5b18f6eec7cb95.js?body=1" for ::1 at 2016-09-22 20:46:42 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-09-22 20:46:42 -0400
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:46:42 -0400
+
+
+Started GET "/assets/bundle.js.map" for ::1 at 2016-09-22 20:46:43 -0400
+
+
+Started GET "/appointments/" for ::1 at 2016-09-22 20:46:43 -0400
+Processing by AppointmentsController#index as */*
+  [1m[35mAppointment Load (0.6ms)[0m  SELECT "appointments".* FROM "appointments"
+  Rendered appointments/index.json.jbuilder (2.2ms)
+Completed 200 OK in 9ms (Views: 7.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for ::1 at 2016-09-22 20:47:00 -0400
+Processing by StaticPagesController#root as HTML
+  Rendered static_pages/root.html within layouts/application (0.0ms)
+Completed 200 OK in 390ms (Views: 389.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/appointments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:47:01 -0400
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:47:01 -0400
+
+
+Started GET "/assets/application.self-d8dc43b02001efbc0739659d65cf187f906f8bfca7c6daa35c220fbf046769c8.css?body=1" for ::1 at 2016-09-22 20:47:01 -0400
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2016-09-22 20:47:01 -0400
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2016-09-22 20:47:01 -0400
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for ::1 at 2016-09-22 20:47:01 -0400
+
+
+Started GET "/assets/appointments.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:47:01 -0400
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:47:01 -0400
+
+
+Started GET "/assets/bundle.self-4f01eb8213276d3944288c252e03d19918933309fd04de9e06a23053697afbae.js?body=1" for ::1 at 2016-09-22 20:47:01 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-09-22 20:47:01 -0400
+
+
+Started GET "/assets/bundle.js.map" for ::1 at 2016-09-22 20:47:01 -0400
+
+
+Started GET "/appointments/" for ::1 at 2016-09-22 20:47:02 -0400
+Processing by AppointmentsController#index as */*
+  [1m[36mAppointment Load (0.5ms)[0m  [1mSELECT "appointments".* FROM "appointments"[0m
+  Rendered appointments/index.json.jbuilder (2.4ms)
+Completed 200 OK in 9ms (Views: 7.9ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:47:03 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Invalid Date", "title"=>"", "email"=>""}}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+Completed 401 Unauthorized in 5ms (Views: 0.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/" for ::1 at 2016-09-22 20:47:06 -0400
+Processing by StaticPagesController#root as HTML
+  Rendered static_pages/root.html within layouts/application (0.0ms)
+Completed 200 OK in 16ms (Views: 15.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/appointments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:47:06 -0400
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:47:06 -0400
+
+
+Started GET "/assets/application.self-d8dc43b02001efbc0739659d65cf187f906f8bfca7c6daa35c220fbf046769c8.css?body=1" for ::1 at 2016-09-22 20:47:06 -0400
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2016-09-22 20:47:06 -0400
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for ::1 at 2016-09-22 20:47:06 -0400
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2016-09-22 20:47:06 -0400
+
+
+Started GET "/assets/appointments.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:47:06 -0400
+
+
+Started GET "/assets/bundle.self-4f01eb8213276d3944288c252e03d19918933309fd04de9e06a23053697afbae.js?body=1" for ::1 at 2016-09-22 20:47:06 -0400
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:47:06 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-09-22 20:47:06 -0400
+
+
+Started GET "/assets/bundle.js.map" for ::1 at 2016-09-22 20:47:07 -0400
+
+
+Started GET "/appointments/" for ::1 at 2016-09-22 20:47:07 -0400
+Processing by AppointmentsController#index as */*
+  [1m[36mAppointment Load (0.5ms)[0m  [1mSELECT "appointments".* FROM "appointments"[0m
+  Rendered appointments/index.json.jbuilder (2.3ms)
+Completed 200 OK in 10ms (Views: 8.2ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:47:10 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Fri Sep 02 2016 20:47:07 GMT-0400 (EDT)", "title"=>"", "email"=>""}}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-09-02' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+Completed 401 Unauthorized in 7ms (Views: 0.1ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/" for ::1 at 2016-09-22 20:47:42 -0400
+Processing by StaticPagesController#root as HTML
+  Rendered static_pages/root.html within layouts/application (0.1ms)
+Completed 200 OK in 376ms (Views: 375.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/appointments.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:47:42 -0400
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-09-22 20:47:42 -0400
+
+
+Started GET "/assets/application.self-d8dc43b02001efbc0739659d65cf187f906f8bfca7c6daa35c220fbf046769c8.css?body=1" for ::1 at 2016-09-22 20:47:42 -0400
+
+
+Started GET "/assets/turbolinks.self-c5acd7a204f5f25ce7a1d8a0e4d92e28d34c9e2df2c7371cd7af88e147e4ad82.js?body=1" for ::1 at 2016-09-22 20:47:42 -0400
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2016-09-22 20:47:42 -0400
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2016-09-22 20:47:42 -0400
+
+
+Started GET "/assets/appointments.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:47:42 -0400
+
+
+Started GET "/assets/bundle.self-f9f621c36f04476b6cb4eaf1b45100fe98ae9b7e82c63d06c1067b0e7fc2411b.js?body=1" for ::1 at 2016-09-22 20:47:42 -0400
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2016-09-22 20:47:42 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2016-09-22 20:47:42 -0400
+
+
+Started GET "/assets/bundle.js.map" for ::1 at 2016-09-22 20:47:43 -0400
+
+
+Started GET "/appointments/" for ::1 at 2016-09-22 20:47:43 -0400
+Processing by AppointmentsController#index as */*
+  [1m[36mAppointment Load (0.5ms)[0m  [1mSELECT "appointments".* FROM "appointments"[0m
+  Rendered appointments/index.json.jbuilder (2.7ms)
+Completed 200 OK in 10ms (Views: 8.7ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:47:44 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Thu Sep 22 2016 20:47:43 GMT-0400 (EDT)", "title"=>"", "email"=>""}}
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-09-22' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+Completed 401 Unauthorized in 5ms (Views: 0.1ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:47:48 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Thu Sep 22 2016 20:47:43 GMT-0400 (EDT)", "title"=>"", "email"=>""}}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mAppointment Exists (0.6ms)[0m  SELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-09-22' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+Completed 401 Unauthorized in 8ms (Views: 0.2ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:47:48 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Thu Sep 22 2016 20:47:43 GMT-0400 (EDT)", "title"=>"", "email"=>""}}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-09-22' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+Completed 401 Unauthorized in 8ms (Views: 0.2ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:47:48 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Thu Sep 22 2016 20:47:43 GMT-0400 (EDT)", "title"=>"", "email"=>""}}
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mAppointment Exists (0.8ms)[0m  SELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-09-22' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+Completed 401 Unauthorized in 8ms (Views: 0.2ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:47:49 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Thu Sep 22 2016 20:47:43 GMT-0400 (EDT)", "title"=>"", "email"=>""}}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-09-22' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+Completed 401 Unauthorized in 8ms (Views: 0.2ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:47:49 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Thu Sep 22 2016 20:47:43 GMT-0400 (EDT)", "title"=>"", "email"=>""}}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mAppointment Exists (0.5ms)[0m  SELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-09-22' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+Completed 401 Unauthorized in 7ms (Views: 0.1ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:47:50 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Fri Sep 02 2016 20:47:43 GMT-0400 (EDT)", "title"=>"", "email"=>""}}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mAppointment Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-09-02' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+Completed 401 Unauthorized in 6ms (Views: 0.2ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/appointments" for ::1 at 2016-09-22 20:47:56 -0400
+Processing by AppointmentsController#create as */*
+  Parameters: {"appointment"=>{"appointment_date"=>"Fri Sep 02 2016 20:47:43 GMT-0400 (EDT)", "title"=>"asdfasdfasdf", "email"=>"asdfasdf"}}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mAppointment Exists (0.5ms)[0m  SELECT  1 AS one FROM "appointments" WHERE "appointments"."appointment_date" = '2016-09-02' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "appointments" ("title", "appointment_date", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "asdfasdfasdf"], ["appointment_date", "2016-09-02"], ["email", "asdfasdf"], ["created_at", "2016-09-23 00:47:56.947648"], ["updated_at", "2016-09-23 00:47:56.947648"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  Rendered appointments/show.json.jbuilder (0.2ms)
+Completed 200 OK in 10ms (Views: 4.8ms | ActiveRecord: 1.3ms)
